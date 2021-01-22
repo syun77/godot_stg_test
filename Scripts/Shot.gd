@@ -4,6 +4,6 @@ func _ready():
 	pass
 
 func _process(delta):
-	if position.y < 64:
+	if Global.isInScreen(self) == false:
 		# 画面外に出たので削除
 		queue_free()

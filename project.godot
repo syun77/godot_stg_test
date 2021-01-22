@@ -19,6 +19,10 @@ config/name="TestGame"
 run/main_scene="res://Scenes/Main.tscn"
 config/icon="res://icon.png"
 
+[autoload]
+
+Global="*res://Scenes/Global.tscn"
+
 [rendering]
 
 environment/default_environment="res://default_env.tres"

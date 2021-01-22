@@ -19,6 +19,16 @@ func _process(delta):
 	if Input.is_action_pressed("ui_right"):
 		position.x += spd # 右に移動
 	
+	# 画面外に出ないようにする	
+	if position.x < Global.VIEW_X:
+		position.x = Global.VIEW_X
+	if position.x > Global.VIEW_W:
+		position.x = Global.VIEW_W
+	if position.y < Global.VIEW_Y:
+		position.y = Global.VIEW_Y
+	if position.y > Global.VIEW_H:
+		position.y = Global.VIEW_H
+	
 	# Spaceキーを押したらショットを発射
 	if Input.is_action_just_pressed(("ui_select")):
 		# ショット生成
