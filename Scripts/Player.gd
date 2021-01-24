@@ -36,8 +36,7 @@ func _process(delta):
 		shot.position = position
 		
 		# 移動量を設定
-		#shot.add_force(Vector2(), Vector2(0, -100))
-		shot.linear_velocity = Vector2(0, -1000)
+		shot.start(position.x, position.y, 90, 1000)
 		
 		# ルートノードを取得
 		var main_node = get_owner()
