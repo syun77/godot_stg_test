@@ -3,6 +3,10 @@ extends Node2D
 # ショットシーンを読み込み
 const Shot = preload("res://Scenes/Shot.tscn")
 
+func hit(damage):
+	# TODO: ダメージを受けたらゲームオーバーにする
+	pass
+	
 func _ready():
 	pass # Replace with function body.
 
