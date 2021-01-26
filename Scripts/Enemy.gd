@@ -1,4 +1,4 @@
-extends KinematicBody2D
+extends Area2D
 
 # 敵弾オブジェクト
 var Bullet = preload("res://Scenes/Bullet.tscn")
@@ -15,7 +15,7 @@ var velocity = Vector2()
 # 弾を撃つ
 func bullet(deg, speed):
 	var bullet = Bullet.instance()
-	bullet.start(position.x, position.y+24, deg, speed)
+	bullet.start(position.x, position.y, deg, speed)
 	# ルートノードを取得
 	var main_node = get_owner()
 	main_node.add_child(bullet)
@@ -47,6 +47,6 @@ func _physics_process(delta):
 	if Global.isInScreen(self) == false:
 		queue_free()
 	
-	# 当たり判定
-	var col = move_and_collide(velocity * delta)
-	# TODO: 未実装
+	# 移動
+	position += velocity * delta
+	

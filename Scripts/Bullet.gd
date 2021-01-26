@@ -1,5 +1,4 @@
-# 物理シュミレートしない物理挙動を持つオブジェクト
-extends KinematicBody2D
+extends Area2D
 
 # 移動方向
 var velocity = Vector2()
@@ -17,11 +16,10 @@ func _physics_process(delta):
 	if Global.isInScreen(self) == false:
 		# 画面外に出たので削除
 		queue_free()
+	
+	position += velocity * delta
 
-	# 移動と衝突判定を行う
-	var col = move_and_collide(velocity * delta)
-	if col:
-		if col.collider.name == "Player":
-			# プレイヤーと衝突したので削除
-			col.collider.hit(1) # 敵に1ダメージ
-			queue_free()
+func _on_Bullet_area_entered(area):
+	if area.name == "Player":
+		area.hit(1) # プレイヤーに1ダメージ
+		queue_free()

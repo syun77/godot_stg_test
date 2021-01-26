@@ -1,4 +1,4 @@
-extends Node2D
+extends Area2D
 
 # ショットシーンを読み込み
 const Shot = preload("res://Scenes/Shot.tscn")
