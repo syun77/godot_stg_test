@@ -1,12 +1,12 @@
 [gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=1]
-[ext_resource path="res://Scenes/Enemy.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scenes/Boss.tscn" type="PackedScene" id=2]
 
 [node name="Main" type="Node2D"]
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
-position = Vector2( 484, 334 )
+position = Vector2( 491.838, 523.681 )
 
-[node name="Enemy" parent="." instance=ExtResource( 2 )]
-position = Vector2( 498, 41 )
+[node name="Boss" parent="." instance=ExtResource( 2 )]
+position = Vector2( 484.955, 125.729 )
