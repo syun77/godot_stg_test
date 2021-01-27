@@ -17,10 +17,10 @@ func _physics_process(delta):
 		# 画面外に出たので削除
 		queue_free()
 	
-	# 移動
+	# 移動a
 	position += velocity * delta
 
 func _on_Shot_area_entered(area):
-	if area.name == "Enemy" or area.name == "Boss":
+	if "Enemy" in area.name or "Boss" in area.name:
 		area.hit(1) # 敵に1ダメージ
 		queue_free()
