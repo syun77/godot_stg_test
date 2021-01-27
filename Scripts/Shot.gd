@@ -21,6 +21,6 @@ func _physics_process(delta):
 	position += velocity * delta
 
 func _on_Shot_area_entered(area):
-	if area.name == "Enemy":
+	if area.name == "Enemy" or area.name == "Boss":
 		area.hit(1) # 敵に1ダメージ
 		queue_free()

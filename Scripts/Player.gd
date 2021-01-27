@@ -3,6 +3,8 @@ extends Area2D
 # ショットシーンを読み込み
 const Shot = preload("res://Scenes/Shot.tscn")
 
+var cnt = 0
+
 func hit(damage):
 	# TODO: ダメージを受けたらゲームオーバーにする
 	pass
@@ -11,6 +13,7 @@ func _ready():
 	pass # Replace with function body.
 
 func _process(delta):
+	
 	# 移動速度
 	var spd = 500 * delta
 	
@@ -34,15 +37,18 @@ func _process(delta):
 		position.y = Global.VIEW_H
 	
 	# Spaceキーを押したらショットを発射
-	if Input.is_action_just_pressed(("ui_select")):
-		# ショット生成
-		var shot = Shot.instance()
-		shot.position = position
-		
-		# 移動量を設定
-		shot.start(position.x, position.y, 90, 1000)
-		
-		# ルートノードを取得
-		var main_node = get_owner()
-		main_node.add_child(shot)
+	if Input.is_action_pressed(("ui_select")):
+		cnt += delta
+		if cnt > 0.05:
+			cnt -= 0.05
+			# ショット生成
+			var shot = Shot.instance()
+			shot.position = position
+			
+			# 移動量を設定
+			shot.start(position.x, position.y, 90, 1000)
+			
+			# ルートノードを取得
+			var main_node = get_owner()
+			main_node.add_child(shot)
 
