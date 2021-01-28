@@ -39,8 +39,8 @@ func _process(delta):
 	# Spaceキーを押したらショットを発射
 	if Input.is_action_pressed(("ui_select")):
 		cnt += delta
-		if cnt > 0.05:
-			cnt -= 0.05
+		if cnt > 0.1:
+			cnt -= 0.1
 			# ショット生成
 			var shot = Shot.instance()
 			shot.position = position
