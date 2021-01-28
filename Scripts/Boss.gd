@@ -5,6 +5,7 @@ var Particle = preload("res://Scenes/Particle.tscn")
 
 var is_init = false
 var hp = 100
+var maxhp = hp # 最大HP
 
 func destroy():
 	var p = Particle.instance()
@@ -39,8 +40,20 @@ func spawn(eid, deg, spd):
 func _ready():
 	pass # Replace with function body.
 
+func _hpratio():
+	# 残りHPの割合を取得
+	return 1.0 * hp / maxhp;
 
 func _physics_process(delta):
 	if is_init == false:
 		update()
 		is_init = true
+		
+	
+	# HPバー更新
+	var hpbar:TextureProgress = $"../HPBar"
+	var hpratio = _hpratio()
+	hpbar.value = 100 * hpratio
+	
+	# HPバーの色を更新
+	hpbar.tint_progress = lerp(Color.red, Color.limegreen, hpratio)
