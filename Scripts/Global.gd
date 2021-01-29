@@ -1,9 +1,9 @@
 extends CanvasLayer
 
 const VIEW_X = 32  # 画面の左上(X)
-const VIEW_Y = 0   # 画面の左上(Y)
-const VIEW_W = 800 # 画面の右下(X)
-const VIEW_H = 600 # 画面の右下(Y)
+const VIEW_Y = 32  # 画面の左上(Y)
+const VIEW_W = 480 # 画面の右下(X)
+const VIEW_H = 720 # 画面の右下(Y)
 
 func isInScreen(obj):
 	# 画面外チェック

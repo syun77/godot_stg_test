@@ -5,15 +5,16 @@
 [ext_resource path="res://Scenes/HPBar.tscn" type="PackedScene" id=3]
 
 [node name="Main" type="Node2D"]
+position = Vector2( -15.3513, -6.97787 )
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
-position = Vector2( 480, 512 )
+position = Vector2( 240, 512 )
 
 [node name="Boss" parent="." instance=ExtResource( 2 )]
-position = Vector2( 480, 128 )
+position = Vector2( 256, 128 )
 
 [node name="HPBar" parent="." instance=ExtResource( 3 )]
-margin_left = 240.0
+margin_left = 52.0
 margin_top = 16.0
-margin_right = 720.0
+margin_right = 452.0
 margin_bottom = 48.0

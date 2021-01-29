@@ -4,9 +4,9 @@
 [ext_resource path="res://bar.png" type="Texture" id=2]
 
 [node name="HPBar" type="TextureProgress"]
-margin_left = -240.0
+margin_left = -200.0
 margin_top = -16.0
-margin_right = 240.0
+margin_right = 200.0
 margin_bottom = 16.0
 value = 100.0
 texture_over = ExtResource( 1 )

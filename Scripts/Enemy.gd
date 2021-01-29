@@ -7,6 +7,7 @@ var Particle = preload("res://Scenes/Particle.tscn")
 var target = null
 
 var id = 0
+var id_previous = 0
 
 # 体力
 var hp = 5
@@ -22,7 +23,7 @@ var past_time = 0
 var destroy_time = -1
 var _wait = 0
 
-var func_buttery = null
+var func_ai = null
 
 # 弾を撃つ
 func bullet(deg, speed):
@@ -34,6 +35,7 @@ func bullet(deg, speed):
 		
 func start(eid, x, y, deg, speed):
 	id = eid
+	id_previous = id
 	var hp_tbl = [0, 10, 10]
 	var dst_tbl = [0, 3, 10]
 	hp = hp_tbl[eid]
@@ -53,13 +55,28 @@ func hit(damage):
 func wait(t):
 	_wait += t
 
-func ai():
+func ai_1():
 	# 1秒ごとに弾を撃つテスト
 	while true:
 		wait(1)
 		yield()
-		aim(500)
-		#bullet(270), 500)
+		aim(500)	
+
+func ai_2():
+	# 1秒ごとに弾を撃つテスト
+	while true:
+		wait(0.5)
+		yield()
+		bullet(270, 100)	
+
+func create_ai():
+	match id:
+		1:
+			return ai_1()
+		2:
+			return ai_2()
+		_:
+			return ai_1()
 
 func aim(spd):
 	var deg = get_aim()
@@ -88,13 +105,20 @@ func destroy():
 	queue_free()
 	
 func _physics_process(delta):
+	
+	if id != id_previous:
+		# idが切り替わった
+		is_init = false # 初期化し直す
+		_wait = 0
+	
 	if is_init == false:
+		# 初期化
 		is_init = true
-		func_buttery = ai()
+		func_ai = create_ai()
 		
 	_wait -= delta
 	if _wait <= 0:
-		func_buttery = func_buttery.resume()
+		func_ai = func_ai.resume()
 
 	if Global.isInScreen(self) == false:
 		destroy()
