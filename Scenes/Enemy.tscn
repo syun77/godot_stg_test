@@ -7,6 +7,7 @@
 extents = Vector2( 17.1123, 16.3208 )
 
 [node name="Enemy" type="Area2D"]
+position = Vector2( 480, 100 )
 script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]

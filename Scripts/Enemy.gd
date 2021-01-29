@@ -4,6 +4,8 @@ extends Area2D
 var Bullet = preload("res://Scenes/Bullet.tscn")
 var Particle = preload("res://Scenes/Particle.tscn")
 
+var target = null
+
 var id = 0
 
 # 体力
@@ -18,6 +20,9 @@ var velocity = Vector2()
 var decay_time = 0
 var past_time = 0
 var destroy_time = -1
+var _wait = 0
+
+var func_buttery = null
 
 # 弾を撃つ
 func bullet(deg, speed):
@@ -45,19 +50,39 @@ func hit(damage):
 		# 消滅
 		destroy()
 
-func update():
+func wait(t):
+	_wait += t
+
+func ai():
 	# 1秒ごとに弾を撃つテスト
 	while true:
-		yield(get_tree().create_timer(1), "timeout")
-		bullet(270, 500)
+		wait(1)
+		yield()
+		aim(500)
+		#bullet(270), 500)
+
+func aim(spd):
+	var deg = get_aim()
+	bullet(deg, spd)
 	
+func get_aim():
+	if is_instance_valid(target):
+		# ターゲットが存在する
+		var dx = target.position.x - position.x
+		var dy = target.position.y - position.y
+		return rad2deg(atan2(-dy, dx))
+	else:
+		# ターゲットが存在しない場合はマウス位置
+		var dx = get_viewport().get_mouse_position().x - position.x
+		var dy = get_viewport().get_mouse_position().y - position.y
+		return rad2deg(atan2(-dy, dx))
 
 func _ready():
-	pass
+	target = $"../Player"
 	
 func destroy():
 	var p = Particle.instance()
-	p.start(position.x, position.y, Color.green)
+	p.start(position.x, position.y, Color.mediumseagreen)
 	var main_node = get_parent()
 	main_node.add_child(p)
 	queue_free()
@@ -65,7 +90,11 @@ func destroy():
 func _physics_process(delta):
 	if is_init == false:
 		is_init = true
-		update()
+		func_buttery = ai()
+		
+	_wait -= delta
+	if _wait <= 0:
+		func_buttery = func_buttery.resume()
 
 	if Global.isInScreen(self) == false:
 		destroy()
@@ -79,6 +108,7 @@ func _physics_process(delta):
 	position += velocity * delta
 	
 	past_time += delta
-	if past_time > destroy_time:
-		# 自爆
-		destroy()
+	if destroy_time > 0:
+		if past_time > destroy_time:
+			# 自爆
+			destroy()
