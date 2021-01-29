@@ -16,6 +16,9 @@ func _process(delta):
 	
 	# 移動速度
 	var spd = 500 * delta
+	if Input.is_action_pressed("ui_select"):
+		# Spaceキーを押しているとスロー
+		spd = 200 * delta
 	
 	if Input.is_action_pressed("ui_up"):
 		position.y -= spd # 上に移動

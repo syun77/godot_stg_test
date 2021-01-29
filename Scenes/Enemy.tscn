@@ -7,8 +7,9 @@
 extents = Vector2( 17.1123, 16.3208 )
 
 [node name="Enemy" type="Area2D"]
-position = Vector2( 480, 100 )
+position = Vector2( 227, 124 )
 script = ExtResource( 2 )
+id = 6
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 1 )
