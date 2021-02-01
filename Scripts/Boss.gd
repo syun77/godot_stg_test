@@ -4,7 +4,7 @@ var Enemy = preload("res://Scenes/Enemy.tscn")
 var Particle = preload("res://Scenes/Particle.tscn")
 
 var is_init = false
-var hp = 100
+var hp = 150
 var maxhp = hp # 最大HP
 
 func destroy():

@@ -169,16 +169,7 @@ func aim(spd, delay=0):
 	bullet(deg, spd, delay)
 	
 func get_aim():
-	if is_instance_valid(target):
-		# ターゲットが存在する
-		var dx = target.position.x - position.x
-		var dy = target.position.y - position.y
-		return rad2deg(atan2(-dy, dx))
-	else:
-		# ターゲットが存在しない場合はマウス位置
-		var dx = get_viewport().get_mouse_position().x - position.x
-		var dy = get_viewport().get_mouse_position().y - position.y
-		return rad2deg(atan2(-dy, dx))
+	return Global.get_aim(self)
 
 func _ready():
 	target = $"../Player"

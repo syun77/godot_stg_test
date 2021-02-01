@@ -5,9 +5,14 @@ const Shot = preload("res://Scenes/Shot.tscn")
 
 var cnt = 0
 
+func destroy():
+	# 消滅
+	queue_free()
+	
+
 func hit(damage):
-	# TODO: ダメージを受けたらゲームオーバーにする
-	pass
+	# ダメージを受けたらゲームオーバーにする
+	destroy()
 	
 func _ready():
 	pass # Replace with function body.
