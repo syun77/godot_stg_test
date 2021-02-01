@@ -20,14 +20,17 @@ func _process(delta):
 		# Spaceキーを押しているとスロー
 		spd = 200 * delta
 	
+	var v = Vector2()
 	if Input.is_action_pressed("ui_up"):
-		position.y -= spd # 上に移動
+		v.y -= 1 # 上に移動
 	if Input.is_action_pressed("ui_down"):
-		position.y += spd # 下に移動
+		v.y += 1 # 下に移動
 	if Input.is_action_pressed("ui_left"):
-		position.x -= spd # 左に移動
+		v.x -= 1 # 左に移動
 	if Input.is_action_pressed("ui_right"):
-		position.x += spd # 右に移動
+		v.x += 1 # 右に移動
+	
+	position += v.normalized() * spd
 	
 	# 画面外に出ないようにする	
 	if position.x < Global.VIEW_X:
