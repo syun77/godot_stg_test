@@ -1,8 +1,11 @@
 extends Area2D
 
+const APPEAR_ITEM = true
+
 # 敵弾オブジェクト
 var Bullet   = preload("res://Scenes/Bullet.tscn")
 var Particle = preload("res://Scenes/Particle.tscn")
+var ItemObj  = preload("res://Item.tscn")
 
 export var id = 0
 var id_previous = 0
@@ -51,8 +54,7 @@ func bullet(deg, speed, delay=0):
 	var bullet = Bullet.instance()
 	bullet.start(position.x, position.y, deg, speed)
 	# ルートノードを取得
-	var main_node = get_parent()
-	main_node.add_child(bullet)
+	Common.bullets.add_child(bullet)
 
 func start(eid, x, y, deg, speed):
 	id = eid
@@ -175,6 +177,15 @@ func _ready():
 	target = $"../Player"
 	
 func destroy():
+	if id == 1:
+		if APPEAR_ITEM:
+			# アイテム出現
+			var item = ItemObj.instance()
+			item.position = position
+			item._velocity.y = -500
+			item._velocity.x = rand_range(-300, 300)
+			Common.enemies.add_child(item)
+	
 	var p = Particle.instance()
 	p.start(position.x, position.y, Color.mediumseagreen)
 	var main_node = get_parent()

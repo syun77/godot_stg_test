@@ -5,7 +5,8 @@ onready var _player  = $Player
 onready var _caption = $Label
 
 func _ready():
-	pass # Replace with function body.
+	Common.enemies = $Enemies
+	Common.bullets = $Bullets
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

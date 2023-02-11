@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/particle.png-c2ba3d91e96c62035d672392a1197218.stex"
+path="res://.import/power2.png-5351ed0ae4282a157a79b37684b7bafd.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://particle.png"
-dest_files=[ "res://.import/particle.png-c2ba3d91e96c62035d672392a1197218.stex" ]
+source_file="res://Scenes/power2.png"
+dest_files=[ "res://.import/power2.png-5351ed0ae4282a157a79b37684b7bafd.stex" ]
 
 [params]
 

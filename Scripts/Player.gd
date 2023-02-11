@@ -3,6 +3,8 @@ extends Area2D
 # ショットシーンを読み込み
 const Shot = preload("res://Scenes/Shot.tscn")
 
+onready var _spr = $Sprite
+
 var cnt = 0
 
 func destroy():
@@ -12,7 +14,8 @@ func destroy():
 
 func hit(damage):
 	# ダメージを受けたらゲームオーバーにする
-	destroy()
+	pass
+	#destroy()
 	
 func _ready():
 	pass # Replace with function body.
@@ -25,6 +28,7 @@ func _process(delta):
 		# Spaceキーを押しているとスロー
 		spd = 200 * delta
 	
+	_spr.frame = 1
 	var v = Vector2()
 	if Input.is_action_pressed("ui_up"):
 		v.y -= 1 # 上に移動
@@ -32,8 +36,10 @@ func _process(delta):
 		v.y += 1 # 下に移動
 	if Input.is_action_pressed("ui_left"):
 		v.x -= 1 # 左に移動
+		_spr.frame = 0
 	if Input.is_action_pressed("ui_right"):
 		v.x += 1 # 右に移動
+		_spr.frame = 2
 	
 	position += v.normalized() * spd
 	

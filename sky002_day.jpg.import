@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/particle.png-c2ba3d91e96c62035d672392a1197218.stex"
+path="res://.import/sky002_day.jpg-ab2252fa9523bd0cdbe9e3f70fdb065a.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://particle.png"
-dest_files=[ "res://.import/particle.png-c2ba3d91e96c62035d672392a1197218.stex" ]
+source_file="res://sky002_day.jpg"
+dest_files=[ "res://.import/sky002_day.jpg-ab2252fa9523bd0cdbe9e3f70fdb065a.stex" ]
 
 [params]
 

@@ -27,6 +27,9 @@ func update():
 		spawn(1, 270-45, 300)
 		spawn(1, 270+45, 300)
 		yield(get_tree().create_timer(2), "timeout")
+		yield(get_tree().create_timer(2), "timeout")
+		continue
+		
 		spawn(2, 0,   600)
 		spawn(2, 180, 600)
 		# 16方向に "3" を生成
@@ -54,8 +57,7 @@ func update():
 func spawn(eid, deg, spd):
 	var e = Enemy.instance()
 	e.start(eid, position.x, position.y, deg, spd)
-	var main_node = get_owner()
-	main_node.add_child(e)
+	Common.enemies.add_child(e)
 
 func _ready():
 	pass # Replace with function body.
