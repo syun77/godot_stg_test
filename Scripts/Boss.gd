@@ -77,4 +77,4 @@ func _physics_process(delta):
 	hpbar.value = 100 * hpratio
 	
 	# HPバーの色を更新
-	hpbar.tint_progress = lerp(Color.RED, Color.LIME_GREEN, hpratio)
+	hpbar.tint_progress = lerp(Color.ORANGE_RED, Color.LIGHT_GREEN, hpratio)
