@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://bn2kucr2edpx"]
+
+[ext_resource type="Script" path="res://Scenes/ParticleText.gd" id="1_as454"]
+[ext_resource type="FontFile" uid="uid://cyeq06uie4g6o" path="res://MT_TARE.ttf" id="1_o8d6n"]
+
+[sub_resource type="Theme" id="Theme_ai5ut"]
+default_font = ExtResource("1_o8d6n")
+default_font_size = 24
+
+[node name="ParticleText" type="Node2D"]
+script = ExtResource("1_as454")
+
+[node name="Label" type="Label" parent="."]
+offset_left = -32.0
+offset_top = -16.0
+offset_right = 32.0
+offset_bottom = 16.0
+theme = SubResource("Theme_ai5ut")
+theme_override_colors/font_outline_color = Color(0.996078, 0, 0.317647, 1)
+theme_override_constants/outline_size = 3
+text = "1000"
+horizontal_alignment = 1
+vertical_alignment = 1

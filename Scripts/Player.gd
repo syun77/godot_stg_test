@@ -1,5 +1,7 @@
 extends Area2D
 
+class_name Player
+
 # ショットシーンを読み込み
 const Shot = preload("res://Scenes/Shot.tscn")
 var Particle = preload("res://Scenes/Particle.tscn")

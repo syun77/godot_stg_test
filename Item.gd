@@ -1,5 +1,7 @@
 extends Area2D
 
+const PARTICLE_TECT_OBJ = preload("res://Scenes/ParticleText.tscn")
+
 const BLINK_TYPE = 2
 
 const GRAVITY = 10
@@ -32,3 +34,11 @@ func _physics_process(delta: float) -> void:
 
 	if position.y > 800:
 		queue_free()
+
+
+func _on_area_entered(area: Area2D) -> void:
+	if area is Player:
+		queue_free()
+		var p = PARTICLE_TECT_OBJ.instantiate()
+		p.position = position
+		get_parent().add_child(p)
