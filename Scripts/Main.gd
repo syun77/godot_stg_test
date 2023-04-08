@@ -5,7 +5,7 @@ extends Node2D
 @onready var _caption = $Label
 
 func _ready():
-	DisplayServer.window_set_size((Vector2i(480*2, 720*2)))
+	#DisplayServer.window_set_size((Vector2i(480*2, 720*2)))
 	
 	Common.enemies = $Enemies
 	Common.bullets = $Bullets
