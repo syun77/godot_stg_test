@@ -6,16 +6,13 @@
 ;   [section] ; section goes between []
 ;   param=value ; assign values to parameters
 
-config_version=4
-
-_global_script_classes=[  ]
-_global_script_class_icons={
-}
+config_version=5
 
 [application]
 
-config/name="TestGame"
+config/name="TestSho"
 run/main_scene="res://Scenes/Main.tscn"
+config/features=PackedStringArray("4.0")
 config/icon="res://icon.png"
 
 [autoload]
@@ -25,9 +22,15 @@ Common="*res://Scenes/Common.gd"
 
 [display]
 
-window/size/width=480
-window/size/height=720
+window/size/viewport_width=480
+window/size/viewport_height=720
+window/stretch/mode="viewport"
+
+[editor]
+
+movie_writer/movie_file="movie.avi"
 
 [rendering]
 
-environment/default_environment="res://default_env.tres"
+textures/canvas_textures/default_texture_filter=0
+environment/defaults/default_environment="res://default_env.tres"

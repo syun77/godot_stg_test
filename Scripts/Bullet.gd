@@ -6,8 +6,8 @@ var velocity = Vector2()
 # 開始
 func start(x, y, deg, speed):
 	position = Vector2(x, y)
-	velocity.x = speed * cos(deg2rad(deg))
-	velocity.y = speed * -sin(deg2rad(deg))
+	velocity.x = speed * cos(deg_to_rad(deg))
+	velocity.y = speed * -sin(deg_to_rad(deg))
 
 func hit(damage):
 	destroy()

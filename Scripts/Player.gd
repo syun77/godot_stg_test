@@ -2,20 +2,23 @@ extends Area2D
 
 # ショットシーンを読み込み
 const Shot = preload("res://Scenes/Shot.tscn")
+var Particle = preload("res://Scenes/Particle.tscn")
 
-onready var _spr = $Sprite
+@onready var _spr = $Sprite2D
 
 var cnt = 0
 
 func destroy():
 	# 消滅
 	queue_free()
-	
+	var p = Particle.instantiate()
+	p.start(position.x, position.y, Color.ORANGE_RED)
+	var main_node = get_parent()
+	main_node.add_child(p)	
 
 func hit(damage):
 	# ダメージを受けたらゲームオーバーにする
-	pass
-	#destroy()
+	destroy()
 	
 func _ready():
 	pass # Replace with function body.
@@ -59,7 +62,7 @@ func _process(delta):
 		if cnt > 0.1:
 			cnt -= 0.1
 			# ショット生成
-			var shot = Shot.instance()
+			var shot = Shot.instantiate()
 			shot.position = position
 			
 			# 移動量を設定

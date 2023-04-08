@@ -8,8 +8,8 @@ var hp = 150
 var maxhp = hp # 最大HP
 
 func destroy():
-	var p = Particle.instance()
-	p.start(position.x, position.y, Color.green)
+	var p = Particle.instantiate()
+	p.start(position.x, position.y, Color.GREEN)
 	var main_node = get_parent()
 	main_node.add_child(p)
 	queue_free()
@@ -23,39 +23,38 @@ func hit(damage):
 
 func update():
 	while true:
-		yield(get_tree().create_timer(1), "timeout")
+		await get_tree().create_timer(1).timeout
 		spawn(1, 270-45, 300)
 		spawn(1, 270+45, 300)
-		yield(get_tree().create_timer(2), "timeout")
-		yield(get_tree().create_timer(2), "timeout")
-		continue
+		await get_tree().create_timer(2).timeout
+		await get_tree().create_timer(2).timeout
 		
 		spawn(2, 0,   600)
 		spawn(2, 180, 600)
 		# 16方向に "3" を生成
-		yield(get_tree().create_timer(1), "timeout")
+		await get_tree().create_timer(1).timeout
 		for i in range(16):
 			var dir = i * 360 / 16
 			spawn(3, dir, 300)
 		
 		# ワインダー
-		yield(get_tree().create_timer(3), "timeout")
+		await get_tree().create_timer(3).timeout
 		spawn(4, 0,   500)
 		spawn(4, 180, 500)
 		
-		yield(get_tree().create_timer(4), "timeout")
+		await get_tree().create_timer(4).timeout
 		spawn(5, 45,  400)
 		spawn(5, 135, 400)
 		
-		yield(get_tree().create_timer(1.5), "timeout")
+		await get_tree().create_timer(1.5).timeout
 		spawn(6, 0,   500)
 		spawn(6, 180, 500)
 		
-		yield(get_tree().create_timer(5), "timeout")
+		await get_tree().create_timer(5).timeout
 
 	
 func spawn(eid, deg, spd):
-	var e = Enemy.instance()
+	var e = Enemy.instantiate()
 	e.start(eid, position.x, position.y, deg, spd)
 	Common.enemies.add_child(e)
 
@@ -73,9 +72,9 @@ func _physics_process(delta):
 		
 	
 	# HPバー更新
-	var hpbar:TextureProgress = $"../HPBar"
+	var hpbar:TextureProgressBar = $"../HPBar"
 	var hpratio = _hpratio()
 	hpbar.value = 100 * hpratio
 	
 	# HPバーの色を更新
-	hpbar.tint_progress = lerp(Color.red, Color.limegreen, hpratio)
+	hpbar.tint_progress = lerp(Color.RED, Color.LIME_GREEN, hpratio)

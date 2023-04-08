@@ -4,7 +4,7 @@ const BLINK_TYPE = 2
 
 const GRAVITY = 10
 
-onready var _spr:Sprite = $Power2
+@onready var _spr:Sprite2D = $Power2
 
 var _cnt = 0
 var _velocity = Vector2.ZERO

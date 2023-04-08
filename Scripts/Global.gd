@@ -43,4 +43,4 @@ func get_aim(obj):
 	var dx = last_target.x - obj.position.x	
 	var dy = last_target.y - obj.position.y	
 
-	return rad2deg(atan2(-dy, dx))
+	return rad_to_deg(atan2(-dy, dx))

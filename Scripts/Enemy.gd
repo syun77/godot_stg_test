@@ -7,7 +7,7 @@ var Bullet   = preload("res://Scenes/Bullet.tscn")
 var Particle = preload("res://Scenes/Particle.tscn")
 var ItemObj  = preload("res://Item.tscn")
 
-export var id = 0
+@export var id = 0
 var id_previous = 0
 var target = null
 
@@ -31,8 +31,10 @@ var decay_time = 0
 var past_time = 0
 var destroy_time = -1
 var _wait = 0
+var _step = 0
+var _cnt = 0
 
-var func_ai = null
+var func_ai:Callable
 
 # NWayを撃つ
 func nway(n, center, wide, speed, delay=0):
@@ -49,9 +51,9 @@ func nway(n, center, wide, speed, delay=0):
 func bullet(deg, speed, delay=0):
 	if delay > 0:
 		# 遅延して発射する
-		yield(get_tree().create_timer(delay), "timeout")
+		await get_tree().create_timer(delay).timeout
 	
-	var bullet = Bullet.instance()
+	var bullet = Bullet.instantiate()
 	bullet.start(position.x, position.y, deg, speed)
 	# ルートノードを取得
 	Common.bullets.add_child(bullet)
@@ -65,8 +67,8 @@ func start(eid, x, y, deg, speed):
 	scale = Vector2(sc, sc)
 	
 	position = Vector2(x, y)
-	velocity.x = speed * cos(deg2rad(deg))
-	velocity.y = speed * -sin(deg2rad(deg))
+	velocity.x = speed * cos(deg_to_rad(deg))
+	velocity.y = speed * -sin(deg_to_rad(deg))
 
 func hit(damage):
 	# ダメージ処理
@@ -80,91 +82,108 @@ func wait(t):
 
 func ai_1():
 	# 高速狙い撃ち弾を撃つ
-	while true:
-		wait(1)
-		yield()
-		while true:
+	match _step:
+		0:
+			wait(1)
+			_step += 1
+		1:
 			for i in range(5):
 				aim(700, i * 0.05)
 			wait(0.8)
-			yield()
 
 func ai_2():
 	# 両サイドから攻撃する
-	wait(1)
-	yield()
-	velocity.x = 0
-	decay_velocity = 1.001 # 速度減衰無効
-	velocity = Vector2(0, 100)
-	while true:
-		var dir = 0-20
-		if position.x > Global.VIEW_W/2:
-			dir = 180+20
-		for i in range(16):
-			bullet(dir, 500, i * 0.03)
-		wait(1)
-		yield()
+	match _step:
+		0:
+			wait(1)
+			_step += 1
+		1:
+			velocity.x = 0
+			decay_velocity = 1.001 # 速度減衰無効
+			velocity = Vector2(0, 100)
+			_step += 1
+		2:
+			var dir = 0-20
+			if position.x > Global.VIEW_W/2:
+				dir = 180+20
+			for i in range(16):
+				bullet(dir, 500, i * 0.03)
+			wait(1)
 
 func ai_3():
 	# 狙い撃ち弾
-	wait(2)
-	yield()
-	for i in range(5):
-		aim(300)
-		wait(1.5)
-		yield()
+	match _step:
+		0:
+			wait(2)
+			_step += 1
+		1:
+			for i in range(5):
+				aim(300)
+			wait(1.5)
 
 func ai_4():
 	# ワインダー
-	wait(2)
-	yield()
-	var cnt = 0
-	while true:
-		var dir = 270 + 20 * sin(deg2rad(cnt*4))
-		bullet(dir, 500)
-		cnt += 1
-		wait(0.05)
-		yield()
+	match _step:
+		0:
+			wait(2)
+			_step += 1
+		1:
+			_cnt = 0
+			_step += 1
+		2:
+			var dir = 270 + 20 * sin(deg_to_rad(_cnt*4))
+			bullet(dir, 500)
+			_cnt += 1
+			wait(0.05)
 
 func ai_5():
 	# ウィップ弾.
-	wait(2)
-	yield()
-	var cnt = 3
-	while true:
-		var dir = get_aim()
-		for i in range(cnt + 2):
-			nway(cnt, dir, 60, 300+(50*i), 0.02 * i * cnt)
-		wait(2)
-		yield()
-		cnt += 1
+	match _step:
+		0:
+			wait(2)
+			_step += 1
+		1:
+			_cnt = 3
+			_step += 2
+		2:
+			var dir = get_aim()
+			for i in range(_cnt + 2):
+				nway(_cnt, dir, 60, 300+(50*i), 0.02 * i * _cnt)
+			wait(2)
+			_cnt += 1
 
 func ai_6():
 	# 回転弾
-	wait(2)
-	yield()
-	var cnt = 0 # 横から開始
-	var d = 8 # 回転速度
-	while true:
-		wait(0.05)
-		yield()
-		bullet(cnt, 200)
-		bullet(cnt+180, 200)
-		if position.x < Global.VIEW_W/2:
-			cnt += d
-		else:
-			cnt -= d
+	match _step:
+		0:
+			wait(2)
+			_step += 1
+		1:
+			_cnt = 0 # 横から開始
+			_step += 1
+		2:
+			wait(0.05)
+			_step += 1
+		3:
+			var d = 8 # 回転速度
+			bullet(_cnt, 200)
+			bullet(_cnt+180, 200)
+			if position.x < Global.VIEW_W/2:
+				_cnt += d
+			else:
+				_cnt -= d
+			_step = 2
 		
 
 func create_ai():
 	match id:
-		1: return ai_1()
-		2: return ai_2()
-		3: return ai_3()
-		4: return ai_4()
-		5: return ai_5()
-		6: return ai_6()
-		_: return ai_1()
+		1: return ai_1
+		2: return ai_2
+		3: return ai_3
+		4: return ai_4
+		5: return ai_5
+		6: return ai_6
+		_: return ai_1
 
 func aim(spd, delay=0):
 	var deg = get_aim()
@@ -180,14 +199,14 @@ func destroy():
 	if id == 1:
 		if APPEAR_ITEM:
 			# アイテム出現
-			var item = ItemObj.instance()
+			var item = ItemObj.instantiate()
 			item.position = position
 			item._velocity.y = -500
-			item._velocity.x = rand_range(-300, 300)
+			item._velocity.x = randf_range(-300, 300)
 			Common.enemies.add_child(item)
 	
-	var p = Particle.instance()
-	p.start(position.x, position.y, Color.mediumseagreen)
+	var p = Particle.instantiate()
+	p.start(position.x, position.y, Color.MEDIUM_SEA_GREEN)
 	var main_node = get_parent()
 	main_node.add_child(p)
 	queue_free()
@@ -208,7 +227,7 @@ func _physics_process(delta):
 	_wait -= delta
 	if _wait <= 0:
 		if func_ai:
-			func_ai = func_ai.resume()
+			func_ai.call()
 
 	if Global.isInScreen(self) == false:
 		destroy()
