@@ -20,7 +20,9 @@ func _physics_process(delta):
 	# 移動a
 	position += velocity * delta
 
-func _on_Shot_area_entered(area):
-	if "Enemy" in area.name or "Boss" in area.name:
+func _on_Shot_area_entered(area:Area2D):
+	# cannot be detected by name in godot 4.x.
+	#if "Enemy" in area.name or "Boss" in area.name:
+	if area is Enemy or area is Boss:
 		area.hit(1) # 敵に1ダメージ
 		queue_free()

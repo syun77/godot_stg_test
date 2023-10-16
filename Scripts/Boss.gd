@@ -1,5 +1,7 @@
 extends Area2D
 
+class_name Boss
+
 var Enemy = preload("res://Scenes/Enemy.tscn")
 var Particle = preload("res://Scenes/Particle.tscn")
 

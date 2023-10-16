@@ -1,5 +1,7 @@
 extends Area2D
 
+class_name Enemy
+
 const APPEAR_ITEM = true
 
 # 敵弾オブジェクト
