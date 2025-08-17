@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://bn2kucr2edpx"]
 
-[ext_resource type="Script" path="res://Scenes/ParticleText.gd" id="1_as454"]
+[ext_resource type="Script" uid="uid://bux155shoeyun" path="res://Scenes/ParticleText.gd" id="1_as454"]
 [ext_resource type="FontFile" uid="uid://cyeq06uie4g6o" path="res://MT_TARE.ttf" id="1_o8d6n"]
 
 [sub_resource type="Theme" id="Theme_ai5ut"]

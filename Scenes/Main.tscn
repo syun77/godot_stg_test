@@ -2,8 +2,8 @@
 
 [ext_resource type="PackedScene" uid="uid://67c7ewty6phs" path="res://Scenes/Player.tscn" id="1"]
 [ext_resource type="PackedScene" uid="uid://dc31k4e44o8e5" path="res://Scenes/Boss.tscn" id="2"]
-[ext_resource type="PackedScene" path="res://Scenes/HPBar.tscn" id="3"]
-[ext_resource type="Script" path="res://Scripts/Main.gd" id="4"]
+[ext_resource type="PackedScene" uid="uid://dp4pv5wor6r24" path="res://Scenes/HPBar.tscn" id="3"]
+[ext_resource type="Script" uid="uid://dtr04v5scvv5t" path="res://Scripts/Main.gd" id="4"]
 [ext_resource type="FontFile" uid="uid://cyeq06uie4g6o" path="res://MT_TARE.ttf" id="5"]
 [ext_resource type="Texture2D" uid="uid://dxnfqulofhgp5" path="res://BG000a1.bmp" id="6"]
 
