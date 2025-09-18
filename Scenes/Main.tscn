@@ -65,7 +65,6 @@ cache/0/48/0/kerning_overrides/47/0 = Vector2(0, 0)
 cache/0/48/0/kerning_overrides/48/0 = Vector2(0, 0)
 
 [node name="Main" type="Node2D"]
-position = Vector2(-15.3513, -6.97787)
 script = ExtResource("4")
 
 [node name="Bg000A1" type="Sprite2D" parent="."]

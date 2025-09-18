@@ -10,9 +10,9 @@ config_version=5
 
 [application]
 
-config/name="TestShooting"
+config/name="初めての2DSTG"
 run/main_scene="res://Scenes/Main.tscn"
-config/features=PackedStringArray("4.4")
+config/features=PackedStringArray("4.5")
 config/icon="res://icon.png"
 
 [autoload]
